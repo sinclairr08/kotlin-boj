@@ -18,17 +18,14 @@ fun main() {
 
 fun p1032(lines: Array<String>): String {
     val sb = StringBuilder()
-    val textLength = lines[0].length
+    val textLength = lines.first().length
 
-    for (textIdx in 0..<textLength) {
-        var currentText = lines[0][textIdx]
-        for (line in lines) {
-            if (line[textIdx] != currentText) {
-                currentText = '?'
-                break
-            }
-        }
-        sb.append(currentText)
+    for (idx in 0..<textLength) {
+        val idxCharacters = lines.map { it[idx] }
+        val indicateCharacter = idxCharacters.first()
+        val isAllSame = idxCharacters.all { it == indicateCharacter }
+
+        sb.append(if (isAllSame) indicateCharacter else '?')
     }
 
     return sb.toString()
